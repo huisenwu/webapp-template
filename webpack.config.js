@@ -44,7 +44,9 @@ module.exports = function(env) {
                     target: "http://localhost:9080",
                     pathRewrite: {"^/static": ""}
                 }
-            }
+            },
+            open: true,
+            openPage: "static/index.html"
         }
     };
 };
