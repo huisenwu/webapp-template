@@ -1,0 +1,42 @@
+{
+  "name": "webapp-template",
+  "version": "0.0.0",
+  "description": "",
+  "main": "dist/api/app.js",
+  "scripts": {
+    "build:api": "babel src/api --out-dir dist/api",
+    "build:ui": "webpack --env.production",
+    "start:api": "cross-env port=9081 nodemon --watch src/api node_modules/@babel/node/lib/babel-node.js src/api/app.js",
+    "start:ui": "webpack-dev-server",
+    "build": "npm run build:ui & npm run build:api",
+    "start": "node dist/api/app.js"
+  },
+  "author": "Hui WU <huisen.wu@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "@babel/runtime": "^7.0.0",
+    "@material-ui/core": "^3.1.0",
+    "@material-ui/icons": "^3.0.1",
+    "express": "^4.16.3",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1",
+    "whatwg-fetch": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.1",
+    "@babel/node": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-transform-react-jsx": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "cross-env": "^5.2.0",
+    "nodemon": "^1.18.4",
+    "webpack": "^4.19.0",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.8"
+  }
+}
