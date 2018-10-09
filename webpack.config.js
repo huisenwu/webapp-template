@@ -20,7 +20,13 @@ module.exports = function(env) {
                             presets: ["@babel/preset-env"],
                             plugins: [
                                 "@babel/plugin-transform-react-jsx",
-                                "@babel/plugin-proposal-class-properties"
+                                "@babel/plugin-proposal-export-default-from",
+                                ["@babel/plugin-proposal-optional-chaining", {loose: false}],
+                                ["@babel/plugin-proposal-pipeline-operator", {proposal: "minimal"}],
+                                ["@babel/plugin-proposal-nullish-coalescing-operator", {loose: false}],
+                                ["@babel/plugin-proposal-decorators", {legacy: true}],
+                                "@babel/plugin-proposal-export-namespace-from",
+                                ["@babel/plugin-proposal-class-properties", {loose: true}]
                             ],
                             cacheDirectory: "tmp",
                             babelrc: false
