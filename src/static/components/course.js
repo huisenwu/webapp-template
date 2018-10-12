@@ -11,7 +11,7 @@ const Course = props => (
             <Card >
                 <CardContent>
                     <Typography gutterBottom variant="headline">
-                        {props.course.title}
+                        {props.course.name}
                     </Typography>
                     <Typography>
                         {props.course.description}
