@@ -6,7 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import LockIcon from '@material-ui/icons/LockOutlined';
+import FaceIcon from '@material-ui/icons/Face';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -52,26 +52,40 @@ function SignUp(props) {
             <main className={classes.layout}>
                 <Paper className={classes.paper}>
                     <Avatar className={classes.avatar}>
-                        <LockIcon />
+                        <FaceIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         Sign Up
                     </Typography>
                     <form className={classes.form}>
                         <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="name">Name</InputLabel>
-                            <Input id="name" name="name" autoComplete="name" autoFocus />
-                        </FormControl>
-                        <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="email">Email Address</InputLabel>
-                            <Input id="email" name="email" autoComplete="email" autoFocus />
-                        </FormControl>
-                        <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="password">Password</InputLabel>
+                            <InputLabel htmlFor="firstName">First Name</InputLabel>
                             <Input
-                                name="password"
-                                type="password"
-                                id="password"
+                                id="firstName"
+                                name="firstName"
+                                autoComplete="firstName"
+                                autoFocus
+                            />
+                        </FormControl>
+                        <FormControl margin="normal" required fullWidth>
+                            <InputLabel htmlFor="lastName">
+                                Last Name
+                            </InputLabel>
+                            <Input
+                                id="lastName"
+                                name="lastName"
+                                autoComplete="lastName"
+                                autoFocus
+                            />
+                        </FormControl>
+                        <FormControl margin="normal" required fullWidth>
+                            <InputLabel htmlFor="Zip Code">
+                                Zip Code
+                            </InputLabel>
+                            <Input
+                                name="Zip Code"
+                                type="Zip Code"
+                                id="Zip Code"
                             />
                         </FormControl>
                         <Button
