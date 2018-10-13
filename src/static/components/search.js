@@ -14,6 +14,7 @@ function renderInput(inputProps) {
 
     return (
         <TextField
+            style={{marginTop: 16}}
             InputProps={{
                 inputRef: ref,
                 classes: {
@@ -82,8 +83,7 @@ class DownshiftMultiple extends React.Component {
 
     componentDidMount() {
         //Load search suggestions
-        //@TODO update later when all tags endpoint is available
-        fetch("/api/tags/type?type=language").then(response => response.json())
+        fetch("/api/tags").then(response => response.json())
             .then(tags => {
                 const searchTags = tags.map(tag => {
                     tag.label = tag.name;
@@ -167,8 +167,9 @@ class DownshiftMultiple extends React.Component {
                                 )),
                                 onChange: this.handleInputChange,
                                 onKeyDown: this.handleKeyDown,
-                                placeholder: 'Search for an Ambassador (ex. Languages Spoken or Zip Code)',
+                                placeholder: 'ex. Languages Spoken',
                             }),
+                            label: 'Capabilities',
                         })}
                         {isOpen ? (
                             <Paper className={classes.paper} square>
@@ -197,8 +198,7 @@ DownshiftMultiple.propTypes = {
 
 const styles = theme => ({
     root: {
-        flexGrow: 1,
-        height: 250,
+        height: 85,
     },
     container: {
         flexGrow: 1,
@@ -215,7 +215,7 @@ const styles = theme => ({
         margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`,
     },
     inputRoot: {
-        flexWrap: 'wrap',
+        marginTop: 16
     },
     inputInput: {
         width: 'auto',
