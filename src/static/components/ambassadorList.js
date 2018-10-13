@@ -1,38 +1,37 @@
 import React, {PureComponent} from "react"
 import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import Course from "./Course"
+import Ambassador from "./ambassador"
 
-class CoursesList extends PureComponent {
+class AmbassadorList extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            courses: []
+            ambassadors: []
         };
     }
 
     componentDidMount() {
-        fetch("/api/courses").then(response => response.json()).then(courses => this.setState({courses}));
+        fetch("/api/ambassadors").then(response => response.json()).then(ambassadors => this.setState({ambassadors}));
     }
 
     render() {
-        const {courses} = this.state;
+        const {ambassadors} = this.state;
         return (
             <div>
-                {courses ?
+                {ambassadors ?
                     <div>
                         <Grid container spacing={24} style={{padding: 24}}>
-                            {courses.map(currentCourse =>
+                            {ambassadors.map(currentAmbassador =>
                                 <Grid item xs={12} sm={6} lg={4} xl={3}>
-                                    <Course course={currentCourse}/>
+                                    <Ambassador ambassador={currentAmbassador}/>
                                 </Grid>
                             )}
                         </Grid>
                     </div> :
-                "No courses found"}
+                "No Ambassadors found"}
             </div>
         )
     }
 }
 
-export default CoursesList;
+export default AmbassadorList;
