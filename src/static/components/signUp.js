@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Search from "./search";
+import {TextField} from "@material-ui/core";
 
 const styles = theme => ({
     layout: {
@@ -44,76 +45,103 @@ const styles = theme => ({
     },
 });
 
-function SignUp(props) {
-    const { classes, onSearch } = props;
+class SignUp extends React.Component {
+static propTypes = {
+        classes: PropTypes.object.isRequired,
+        onSearch: PropTypes.func
+    };
 
-    return (
-        <React.Fragment>
-            <CssBaseline />
-            <main className={classes.layout}>
-                <Paper className={classes.paper}>
-                    <Avatar className={classes.avatar}>
-                        <FaceIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign Up
-                    </Typography>
-                    <form className={classes.form}>
-                        <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="firstName">First Name</InputLabel>
-                            <Input
-                                id="firstName"
-                                name="firstName"
-                                autoComplete="firstName"
-                                autoFocus
-                            />
-                        </FormControl>
-                        <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="lastName">
-                                Last Name
-                            </InputLabel>
-                            <Input
-                                id="lastName"
-                                name="lastName"
-                                autoComplete="lastName"
-                                autoFocus
-                            />
-                        </FormControl>
-                        <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="Zip Code">
-                                Zip Code
-                            </InputLabel>
-                            <Input
-                                name="Zip Code"
-                                type="Zip Code"
-                                id="Zip Code"
-                            />
-                        </FormControl>
-                        <Search onSearch={onSearch} searchType="skill" searchName="Skills" placeHolder="ex. legal services" />
-                        <Search onSearch={onSearch} searchType="language" searchName="Language" placeHolder="ex. Spanish, Italian" />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            className={classes.submit}
-                        >
+static defaultProps = {
+        onSearch: null
+    };
+
+    onTagSearch = (query, name) => {
+        //set the array that returns to state
+        console.log(query);
+        this.setState({[name]:query});
+    };
+
+    state = {
+        firstName: "",
+        lastName: "",
+        zipCode: "",
+        language: [],
+        skills: []
+    };
+
+    handleChange(e, name) {
+        this.setState({[name]: e.target.value});
+    }
+
+    render() {
+        const {classes} = this.props;
+
+        console.log(this.state);
+
+        return (
+            <React.Fragment>
+                <CssBaseline/>
+                <main className={classes.layout}>
+                    <Paper className={classes.paper}>
+                        <Avatar className={classes.avatar}>
+                            <FaceIcon/>
+                        </Avatar>
+                        <Typography component="h1" variant="h5">
                             Sign Up
-                        </Button>
-                    </form>
-                </Paper>
-            </main>
-        </React.Fragment>
-    );
+                        </Typography>
+                        <form className={classes.form}>
+                            <FormControl margin="normal" required fullWidth>
+                                <InputLabel htmlFor="firstName">First Name</InputLabel>
+                                <Input
+                                    id="firstName"
+                                    name="firstName"
+                                    autoComplete="firstName"
+                                    autoFocus
+                                    onChange={(e) => this.handleChange(e, "firstName")} value={this.state.firstName}
+                                />
+                            </FormControl>
+                            <FormControl margin="normal" required fullWidth>
+                                <InputLabel htmlFor="lastName">
+                                    Last Name
+                                </InputLabel>
+                                <Input
+                                    id="lastName"
+                                    name="lastName"
+                                    autoComplete="lastName"
+                                    autoFocus
+                                    onChange={(e) => this.handleChange(e, "lastName")} value={this.state.lastName}
+                                />
+                            </FormControl>
+                            <FormControl margin="normal" required fullWidth>
+                                <InputLabel htmlFor="Zip Code">
+                                    Zip Code
+                                </InputLabel>
+                                <Input
+                                    name="Zip Code"
+                                    type="Zip Code"
+                                    id="Zip Code"
+                                    onChange={(e) => this.handleChange(e, "zipCode")} value={this.state.zipCode}
+                                />
+                            </FormControl>
+                            <Search onSearch={(query) => this.onTagSearch(query, "skills")} searchType="skill" searchName="Skills"
+                                    placeHolder="ex. legal services"/>
+                            <Search onSearch={(query) => this.onTagSearch(query, "language")} searchType="language" searchName="Language"
+                                    placeHolder="ex. Spanish, Italian"/>
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                className={classes.submit}
+                            >
+                                Sign Up
+                            </Button>
+                        </form>
+                    </Paper>
+                </main>
+            </React.Fragment>
+        );
+    }
 }
-
-SignUp.propTypes = {
-    classes: PropTypes.object.isRequired,
-    onSearch: PropTypes.func
-};
-
-SignUp.defaultPropTypes = {
-    onSearch: null
-};
 
 export default withStyles(styles)(SignUp);

@@ -22,7 +22,7 @@ class Main extends PureComponent {
     }
     onTagSearch = query => {
         //ex. http://localhost:8080/api/ambassadors?tags=Apartment&tags=Education
-        fetch(`/api/ambassadors?tags=${query.join("tags=")}`).then(response => response.json()).then(ambassadors => this.setState({ambassadors, firstName: "", lastName: ""}));
+        fetch(`/api/ambassadors?tags=${query.join("tags=")}`).then(response => response.json()).then(ambassadors => this.setState({ambassadors}));
     };
     handleChange(e, name) {
         this.setState({[name]: e.target.value}, () => this.onNameSearch());
@@ -40,7 +40,7 @@ class Main extends PureComponent {
                 </div>
                 <AmbassadorList ambassadors={this.state.ambassadors}/>
                 <div>
-                    <SignUp onSearch={this.onTagSearch}/>
+                    <SignUp />
                 </div>
 
             </div>
