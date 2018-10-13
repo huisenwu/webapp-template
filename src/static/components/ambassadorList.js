@@ -22,8 +22,8 @@ class AmbassadorList extends PureComponent {
                     <div>
                         <Grid container spacing={24} style={{padding: 24}}>
                             {ambassadors.map(currentAmbassador =>
-                                <Grid item xs={12} sm={6} lg={4} xl={3}>
-                                    <Ambassador ambassador={currentAmbassador}/>
+                                <Grid item xs={12} sm={6} lg={4} xl={3} key={currentAmbassador.id} >
+                                    <Ambassador ambassador={currentAmbassador} />
                                 </Grid>
                             )}
                         </Grid>
