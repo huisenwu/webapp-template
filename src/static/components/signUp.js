@@ -10,6 +10,7 @@ import FaceIcon from '@material-ui/icons/Face';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import Search from "./search";
 
 const styles = theme => ({
     layout: {
@@ -44,7 +45,7 @@ const styles = theme => ({
 });
 
 function SignUp(props) {
-    const { classes } = props;
+    const { classes, onSearch } = props;
 
     return (
         <React.Fragment>
@@ -88,6 +89,8 @@ function SignUp(props) {
                                 id="Zip Code"
                             />
                         </FormControl>
+                        <Search onSearch={onSearch} searchType="skill" searchName="Skills" placeHolder="ex. legal services" />
+                        <Search onSearch={onSearch} searchType="language" searchName="Language" placeHolder="ex. Spanish, Italian" />
                         <Button
                             type="submit"
                             fullWidth
@@ -106,6 +109,11 @@ function SignUp(props) {
 
 SignUp.propTypes = {
     classes: PropTypes.object.isRequired,
+    onSearch: PropTypes.func
+};
+
+SignUp.defaultPropTypes = {
+    onSearch: null
 };
 
 export default withStyles(styles)(SignUp);
