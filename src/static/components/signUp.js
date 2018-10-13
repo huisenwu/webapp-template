@@ -73,6 +73,25 @@ static defaultProps = {
         this.setState({[name]: e.target.value});
     }
 
+    onFormSubmit(event) {
+        event.preventDefault();
+        const data = {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            postalCode: this.state.zipCode,
+            tags: []
+        }
+        fetch('/api/ambassadors', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                this.state
+            )
+        });
+        console.log("submit");
+    }
     render() {
         const {classes} = this.props;
 
@@ -133,6 +152,7 @@ static defaultProps = {
                                 variant="contained"
                                 color="primary"
                                 className={classes.submit}
+                                onClick={(e) => this.onFormSubmit(e)}
                             >
                                 Sign Up
                             </Button>
