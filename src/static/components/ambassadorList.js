@@ -35,7 +35,7 @@ class AmbassadorList extends PureComponent {
                                     <Ambassador ambassador={currentAmbassador} />
                                 </ListItem>
                             )}
-                            "No Ambassadors found"
+                            {/*"No Ambassadors found"*/}
                         </List>
                     </div>
             </div>

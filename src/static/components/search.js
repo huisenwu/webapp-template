@@ -141,7 +141,6 @@ class DownshiftMultiple extends React.Component {
     };
 
     render() {
-        console.log("!!!", this.props);
         const { classes, searchName, placeHolder } = this.props;
         const { inputValue, selectedItem } = this.state;
 
