@@ -6,12 +6,12 @@ class AmbassadorList extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            ambassadors: []
+            ambassadors: null
         };
     }
 
     componentDidMount() {
-        fetch("/api/ambassadors").then(response => response.json()).then(ambassadors => this.setState({ambassadors}));
+        // fetch("/api/ambassadors").then(response => response.json()).then(ambassadors => this.setState({ambassadors}));
     }
 
     render() {
