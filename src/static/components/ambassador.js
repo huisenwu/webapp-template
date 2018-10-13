@@ -9,7 +9,7 @@ const Ambassador = props => (
             <Card >
                 <CardContent>
                     <Typography gutterBottom variant="headline">
-                        {props.ambassador.name}
+                        {props.ambassador.firstName}{props.ambassador.lastName}
                     </Typography>
                     <Typography>
                         {props.ambassador.description}
