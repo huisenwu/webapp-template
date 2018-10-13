@@ -14,6 +14,7 @@ function renderInput(inputProps) {
 
     return (
         <TextField
+            style={{marginTop: 16}}
             InputProps={{
                 inputRef: ref,
                 classes: {
@@ -81,9 +82,15 @@ class DownshiftMultiple extends React.Component {
     };
 
     componentDidMount() {
+        this.search(this.props.searchType);
+    }
+    componentWillReceiveProps(nextProps, nextContext) {
+        if(this.props.searchType !== nextProps.searchType) this.search(nextProps.searchType);
+    }
+    search(searchType) {
         //Load search suggestions
-        //@TODO update later when all tags endpoint is available
-        fetch("/api/tags/type?type=language").then(response => response.json())
+        if(!searchType) return;
+        fetch(`/api/tags/type?type=${searchType}`).then(response => response.json())
             .then(tags => {
                 const searchTags = tags.map(tag => {
                     tag.label = tag.name;
@@ -91,6 +98,7 @@ class DownshiftMultiple extends React.Component {
                 });
                 this.setState({searchTags});
             });
+
     }
     handleKeyDown = event => {
         const { inputValue, selectedItem } = this.state;
@@ -133,7 +141,8 @@ class DownshiftMultiple extends React.Component {
     };
 
     render() {
-        const { classes } = this.props;
+        console.log("!!!", this.props);
+        const { classes, searchName, placeHolder } = this.props;
         const { inputValue, selectedItem } = this.state;
 
         return (
@@ -167,8 +176,9 @@ class DownshiftMultiple extends React.Component {
                                 )),
                                 onChange: this.handleInputChange,
                                 onKeyDown: this.handleKeyDown,
-                                placeholder: 'Search for an Ambassador (ex. Languages Spoken or Zip Code)',
+                                placeholder: placeHolder
                             }),
+                            label: searchName,
                         })}
                         {isOpen ? (
                             <Paper className={classes.paper} square>
@@ -192,13 +202,22 @@ class DownshiftMultiple extends React.Component {
 
 DownshiftMultiple.propTypes = {
     classes: PropTypes.object.isRequired,
-    onSearch: PropTypes.func
+    onSearch: PropTypes.func,
+    searchType: PropTypes.string,
+    searchName: PropTypes.string,
+    placeHolder: PropTypes.string
+
+};
+DownshiftMultiple.defaultProps = {
+    onSearch: PropTypes.func,
+    searchType: null,
+    searchName: null,
+    placeHolder: null
 };
 
 const styles = theme => ({
     root: {
-        flexGrow: 1,
-        height: 250,
+        height: 85,
     },
     container: {
         flexGrow: 1,
@@ -215,7 +234,7 @@ const styles = theme => ({
         margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`,
     },
     inputRoot: {
-        flexWrap: 'wrap',
+        marginTop: 16
     },
     inputInput: {
         width: 'auto',
@@ -227,18 +246,27 @@ const styles = theme => ({
 });
 
 function Search(props) {
-    const { classes, onSearch } = props;
+    const { classes, onSearch, searchName, searchType, placeHolder} = props;
 
     return (
         <div className={classes.root}>
-            <DownshiftMultiple classes={classes} onSearch={onSearch}/>
+            <DownshiftMultiple classes={classes} onSearch={onSearch} searchType={searchType} searchName={searchName} placeHolder={placeHolder}/>
         </div>
     );
 }
 
 Search.propTypes = {
     classes: PropTypes.object.isRequired,
-    onSearch: PropTypes.func
+    onSearch: PropTypes.func,
+    searchType: PropTypes.string,
+    searchName: PropTypes.string,
+    placeHolder: PropTypes.string,
+};
+Search.defaultProps = {
+    onSearch: null,
+    searchType: null,
+    searchName: null,
+    placeHolder: null
 };
 
 export default withStyles(styles)(Search);

@@ -8,7 +8,7 @@ const Header = () => (
         <AppBar position="static">
             <Toolbar>
                 <Typography variant="title" color="inherit">
-                    Template
+                    Ambassador Connect
                 </Typography>
             </Toolbar>
         </AppBar>
