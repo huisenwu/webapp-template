@@ -19,8 +19,6 @@ class AmbassadorList extends PureComponent {
         return (
             <div style={{margin: "20px"}}>
                     <div>
-                        {/*<Divider />*/}
-
                         <List subheader={
                             <ListSubheader component="div" style={{display: "flex"}}>
                                 <ListItem>Name</ListItem>
