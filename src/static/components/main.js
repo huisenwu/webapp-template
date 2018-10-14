@@ -3,6 +3,7 @@ import Header from "./header";
 import AmbassadorList from "./ambassadorList";
 import Search from "./search";
 import {FormControlLabel, TextField, Switch} from "@material-ui/core";
+import SignUp from "./signUp";
 
 class Main extends PureComponent {
     state = {
@@ -40,6 +41,9 @@ class Main extends PureComponent {
                     <FormControlLabel control={<Switch value="Available"/>} label="Available" />
                 </div>
                 <AmbassadorList ambassadors={this.state.ambassadors}/>
+                <div>
+                    <SignUp />
+                </div>
 
             </div>
         );
