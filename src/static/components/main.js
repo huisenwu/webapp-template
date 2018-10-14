@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import Header from "./header";
 import AmbassadorList from "./ambassadorList";
 import SearchBar from "./searchBar";
+import SignUp from "./signUp";
 
 class Main extends PureComponent {
     state = {
@@ -33,6 +34,9 @@ class Main extends PureComponent {
                 <Header />
                 <SearchBar onTagSearch={this.onTagSearch} handleChange={this.handleChange} onNameSearch={this.onNameSearch} />
                 <AmbassadorList ambassadors={this.state.ambassadors}/>
+                <div>
+                    <SignUp />
+                </div>
 
             </div>
         );
