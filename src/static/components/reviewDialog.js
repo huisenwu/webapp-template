@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
-import {TagFaces, ArrowForward} from "@material-ui/icons";
+import {ArrowForward} from "@material-ui/icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSmile, faMeh, faFrown } from '@fortawesome/free-solid-svg-icons';
 
@@ -19,7 +19,7 @@ export default class FormDialog extends React.Component {
     state = {
         open: false,
         rating: null,
-        review: null
+        review: ""
     };
     handleClickOpen = () => {
         this.setState({ open: true });
@@ -30,7 +30,7 @@ export default class FormDialog extends React.Component {
     };
     onSaveFeedback = () => {
         const {rating, review} = this.state;
-        if(!rating || !review) return;
+        if(!rating) return;
         fetch(`/api/ambassadors/${this.props.ambassador.id}/reviews`, {
             method: 'POST',
             headers: {
@@ -39,8 +39,8 @@ export default class FormDialog extends React.Component {
             body: JSON.stringify({rating, review})
         }).then(() => this.handleClose());
     };
-    handleChange = () => {
-        this.setState({review: event.target.value})
+    handleChange = (e) => {
+        this.setState({review: e.target.value})
     };
     render() {
         const {ambassador} = this.props;
@@ -54,13 +54,13 @@ export default class FormDialog extends React.Component {
                     aria-labelledby="form-dialog-title"
                 >
                     <DialogContent style={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", width: 400}}>
-                        <div style={{width: 200, height: 200, borderRadius: 200, backgroundColor: "blue", margin: 20}}/>
+                        <div style={{width: 200, height: 200, borderRadius: 200, backgroundColor: "#078B75", margin: 20}}/>
                         <div>Rate</div>
                         <div><b>{fullName}</b></div>
                         <div style={{margin: "20px 0"}}>
-                            <FontAwesomeIcon icon={faFrown} onClick={() => this.setState({rating: 1})} style={{color: this.state.rating === 1 ? "yellow" : "gray", fontSize: 80, margin: "0 10px"}} />
-                            <FontAwesomeIcon icon={faMeh} onClick={() => this.setState({rating: 2})} style={{color: this.state.rating === 2 ? "yellow" : "gray", fontSize: 80, margin: "0 10px"}} />
-                            <FontAwesomeIcon icon={faSmile} onClick={() => this.setState({rating: 3})} style={{color: this.state.rating === 3 ? "yellow" : "gray", fontSize: 80, margin: "0 10px"}} />
+                            <FontAwesomeIcon icon={faFrown} onClick={() => this.setState({rating: 1})} style={{color: this.state.rating === 1 ? "#078B75" : "#C1C1C1", fontSize: 80, margin: "0 10px"}} />
+                            <FontAwesomeIcon icon={faMeh} onClick={() => this.setState({rating: 2})} style={{color: this.state.rating === 2 ? "#078B75" : "#C1C1C1", fontSize: 80, margin: "0 10px"}} />
+                            <FontAwesomeIcon icon={faSmile} onClick={() => this.setState({rating: 3})} style={{color: this.state.rating === 3 ? "#078B75" : "#C1C1C1", fontSize: 80, margin: "0 10px"}} />
                         </div>
                         <TextField
                             autoFocus
@@ -70,9 +70,9 @@ export default class FormDialog extends React.Component {
                             fullWidth
                             onChange={this.handleChange}
                         />
-                        <div style={{background: !this.state.rating || !this.state.review ? "gray" : "blue", borderRadius: 20, margin: 20}}>
-                            <Button disabled={!this.state.rating || !this.state.review}>
-                                <ArrowForward onClick={this.onSaveFeedback} style={{fontSize: 100, color: "white"}} />
+                        <div style={{background: !this.state.rating ? "#C1C1C1" : "#078B75", borderRadius: 10, margin: 20}}>
+                            <Button disabled={!this.state.rating}>
+                                <ArrowForward onClick={this.onSaveFeedback} style={{fontSize: 75, color: "white"}} />
                             </Button>
                         </div>
                     </DialogContent>
