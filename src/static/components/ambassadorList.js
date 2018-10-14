@@ -1,7 +1,6 @@
 import React, {PureComponent} from "react"
 import PropTypes from "prop-types";
-import {List, ListItem, ListSubheader, ListItemText, Divider} from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
+import {List, ListItem, ListSubheader, Divider} from "@material-ui/core";
 import Ambassador from "./ambassador"
 
 class AmbassadorList extends PureComponent {

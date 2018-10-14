@@ -6,6 +6,8 @@ import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {PlayArrow, Pause, Stop} from "@material-ui/icons";
+import ReviewDialog from "./reviewDialog"
+
 const styles = theme => ({
     root: {
         width: '100%',
@@ -86,7 +88,7 @@ function DetailedExpansionPanel(props) {
                         <Typography className={classes.heading}>{ambassador?.phone}</Typography>
                     </div>
                     <div className={classes.column}>
-                        <Typography className={classes.heading}>Ratings 2.3/3 based on 24 ratings</Typography>
+                        <Typography className={classes.heading}>Ratings {ambassador.overallRating}/3 based on {ambassador.reviews.length} ratings</Typography>
                     </div>
                 </ExpansionPanelDetails>
                 <ExpansionPanelDetails className={classes.details}>
@@ -97,7 +99,7 @@ function DetailedExpansionPanel(props) {
                 </ExpansionPanelDetails>
                 <Divider />
                 <ExpansionPanelActions>
-                    <Button size="small" color="primary">Leave Feedback</Button>
+                    <ReviewDialog ambassador={ambassador}/>
                     <Button size="small" color="primary">Edit</Button>
                 </ExpansionPanelActions>
             </ExpansionPanel>
