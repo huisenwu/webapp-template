@@ -22,7 +22,7 @@ class AmbassadorList extends PureComponent {
                         <List subheader={
                             <ListSubheader component="div" style={{display: "flex"}}>
                                 <ListItem>Name</ListItem>
-                                <ListItem>Capabilities</ListItem>
+                                <ListItem>Skills</ListItem>
                                 <ListItem>Languages</ListItem>
                                 <ListItem>Location</ListItem>
                             </ListSubheader>
