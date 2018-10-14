@@ -54,7 +54,15 @@ export default class FormDialog extends React.Component {
                     aria-labelledby="form-dialog-title"
                 >
                     <DialogContent style={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", width: 400}}>
-                        <div style={{width: 200, height: 200, borderRadius: 200, backgroundColor: "#078B75", margin: 20}}/>
+                        <div style={{width: 200, height: 200, borderRadius: 200, border: "solid 10px #078B75", margin: 20}}>
+                            {
+                                ambassador.gender === "MALE" ?
+                                    <img src="./images/male.svg" alt="Logo"/> :
+                                ambassador.gender === "FEMALE" ?
+                                    <img src="./images/female.svg" alt="Logo"/> :
+                                    null
+                            }
+                        </div>
                         <div>Rate</div>
                         <div><b>{fullName}</b></div>
                         <div style={{margin: "20px 0"}}>
