@@ -36,7 +36,7 @@ const styles = theme => ({
     },
     avatar: {
         margin: theme.spacing.unit,
-        backgroundColor: theme.palette.secondary.main,
+        backgroundColor: "#078b75",
     },
     form: {
         width: '100%',
@@ -44,6 +44,8 @@ const styles = theme => ({
     },
     submit: {
         marginTop: theme.spacing.unit * 3,
+        color: "#fff",
+        backgroundColor: "#078b75"
     },
     grid: {
         padding: "0px 0px 50px 0px"
@@ -128,7 +130,7 @@ static defaultProps = {
                             <FaceIcon/>
                         </Avatar>
                         <Typography component="h1" variant="h5" style={{textAlign: "center"}}>
-                            Register Ambassador
+                            Ambassador Application
                         </Typography>
                         <form className={classes.form}>
                             <FormControl margin="normal" required fullWidth>
@@ -218,7 +220,6 @@ static defaultProps = {
                                 type="submit"
                                 fullWidth
                                 variant="contained"
-                                color="primary"
                                 className={classes.submit}
                                 onClick={(e) => this.onFormSubmit(e)}
                             >
