@@ -28,12 +28,14 @@ class AmbassadorList extends PureComponent {
                             </ListSubheader>
                         }>
                             <Divider />
-                            {ambassadors?.map(currentAmbassador =>
-                                <ListItem xs={12} sm={6} lg={4} xl={3} key={currentAmbassador.id} >
-                                    <Ambassador ambassador={currentAmbassador} />
-                                </ListItem>
-                            )}
-                            {/*"No Ambassadors found"*/}
+                            {
+                                ambassadors?.length > 0 ?
+                                    ambassadors?.map(currentAmbassador =>
+                                    <ListItem xs={12} sm={6} lg={4} xl={3} key={currentAmbassador.id} >
+                                        <Ambassador ambassador={currentAmbassador} />
+                                    </ListItem>) :
+                                    <div style={{display: "flex", justifyContent: "center", alignContent: "center", marginTop: 50, color: "darkGray"}}>No Ambassadors found</div>
+                            }
                         </List>
                     </div>
             </div>
