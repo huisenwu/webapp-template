@@ -11,7 +11,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Search from "./search";
-import {TextField} from "@material-ui/core";
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const styles = theme => ({
     layout: {
@@ -65,8 +66,13 @@ static defaultProps = {
         firstName: "",
         lastName: "",
         zipCode: "",
+        phone: "",
+        email: "",
+        status: "ACTIVE",
+        gender: "UNSPECIFIED",
         language: [],
-        skills: []
+        skill: [],
+        tags: []
     };
 
     handleChange(e, name) {
@@ -78,16 +84,21 @@ static defaultProps = {
         const data = {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
-            postalCode: this.state.zipCode,
-            tags: []
+            postalCode: this.state.postalCode,
+            phone: this.state.phone,
+            email: this.state.email,
+            status: this.state.status,
+            gender: this.state.gender,
+            tags: [...this.state.skill.map(i => {return{id:i.id}}), ...this.state.language.map(i => {return{id:i.id}})]
         }
+        console.log(data);
         fetch('/api/ambassadors', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(
-                this.state
+                data
             )
         });
         console.log("submit");
@@ -139,10 +150,56 @@ static defaultProps = {
                                     name="Zip Code"
                                     type="Zip Code"
                                     id="Zip Code"
-                                    onChange={(e) => this.handleChange(e, "zipCode")} value={this.state.zipCode}
+                                    onChange={(e) => this.handleChange(e, "postalCode")} value={this.state.postalCode}
                                 />
                             </FormControl>
-                            <Search onSearch={(query) => this.onTagSearch(query, "skills")} searchType="skill" searchName="Skills"
+                            <FormControl margin="normal" required fullWidth>
+                                <InputLabel htmlFor="Phone Number">
+                                    Phone
+                                </InputLabel>
+                                <Input
+                                    name="Phone Number"
+                                    type="Phone Number"
+                                    id="Phone Number"
+                                    onChange={(e) => this.handleChange(e, "phone")} value={this.state.phone}
+                                />
+                            </FormControl>
+                            <FormControl margin="normal" required fullWidth>
+                                <InputLabel htmlFor="Email">
+                                    Email
+                                </InputLabel>
+                                <Input
+                                    name="Email"
+                                    type="Email"
+                                    id="Email"
+                                    onChange={(e) => this.handleChange(e, "email")} value={this.state.email}
+                                />
+                            </FormControl>
+                            <FormControl className={classes.formControl}>
+                                <InputLabel htmlFor="Status">Status</InputLabel>
+                                <Select
+                                    onChange={(e) => this.handleChange(e, "status")} value={this.state.status}
+                                >
+                                    <MenuItem value={"ACTIVE"}>Active</MenuItem>
+                                    <MenuItem value={"INACTIVE"}>Inactive</MenuItem>
+                                    <MenuItem value={"PAUSED"}>Paused</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <div>
+                            <FormControl className={classes.formControl}>
+                                <InputLabel htmlFor="Gender">Gender</InputLabel>
+                                <Select
+                                    onChange={(e) => this.handleChange(e, "gender")} value={this.state.gender}
+                                >
+                                    <MenuItem value={"MALE"}>Male</MenuItem>
+                                    <MenuItem value={"FEMALE"}>Female</MenuItem>
+                                    <MenuItem value={"UNSPECIFIED"}>Unspecified</MenuItem>
+                                    <MenuItem value={"OTHER"}>Other</MenuItem>
+                                </Select>
+                            </FormControl>
+                            </div>
+                            <div></div>
+                            <Search onSearch={(query) => this.onTagSearch(query, "skill")} searchType="skill" searchName="Skills"
                                     placeHolder="ex. legal services"/>
                             <Search onSearch={(query) => this.onTagSearch(query, "language")} searchType="language" searchName="Language"
                                     placeHolder="ex. Spanish, Italian"/>
