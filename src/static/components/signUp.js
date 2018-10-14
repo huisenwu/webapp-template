@@ -62,7 +62,7 @@ static defaultProps = {
 
     onTagSearch = (query, name) => {
         //set the array that returns to state
-        console.log(query);
+        //console.log(query);
         this.setState({[name]:query});
     };
 
@@ -95,7 +95,7 @@ static defaultProps = {
             gender: this.state.gender,
             tags: [...this.state.skill.map(i => {return{id:i.id}}), ...this.state.language.map(i => {return{id:i.id}})]
         }
-        console.log(data);
+        //console.log(data);
         fetch('/api/ambassadors', {
             method: 'POST',
             headers: {
@@ -105,12 +105,12 @@ static defaultProps = {
                 data
             )
         });
-        console.log("submit");
+        //console.log("submit");
     }
     render() {
         const {classes} = this.props;
 
-        console.log(this.state);
+        //console.log(this.state);
 
         return (
             <Grid
