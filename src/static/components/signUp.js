@@ -13,6 +13,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Search from "./search";
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
     layout: {
@@ -44,6 +45,9 @@ const styles = theme => ({
     submit: {
         marginTop: theme.spacing.unit * 3,
     },
+    grid: {
+        padding: "0px 0px 50px 0px"
+    }
 });
 
 class SignUp extends React.Component {
@@ -109,6 +113,13 @@ static defaultProps = {
         console.log(this.state);
 
         return (
+            <Grid
+                container
+                direction="column"
+                justify="center"
+                alignItems="center"
+                className={classes.grid}
+            >
             <React.Fragment>
                 <CssBaseline/>
                 <main className={classes.layout}>
@@ -217,6 +228,7 @@ static defaultProps = {
                     </Paper>
                 </main>
             </React.Fragment>
+            </Grid>
         );
     }
 }
