@@ -110,19 +110,13 @@ class DownshiftMultiple extends React.Component {
     };
 
     handleInputChange = event => {
-        this.setState({ inputValue: event.target.value },
-            () => Number(this.state.inputValue) && this.state.inputValue.length === 5 && this.handleChange(null, this.state.inputValue)
-        );
+        this.setState({ inputValue: event.target.value });
     };
 
-    handleChange = (item, zipCode = null) => {
+    handleChange = (item) => {
         let { selectedItem } = this.state;
 
-        if(Number(zipCode)) {
-            selectedItem = [...selectedItem.filter(itemz => !Number(itemz)), zipCode];
-        }
-
-        if (item && selectedItem.indexOf(item) === -1 && !Number(zipCode)) {
+        if (selectedItem.indexOf(item) === -1) {
             selectedItem = [...selectedItem, item];
         }
 
@@ -143,7 +137,6 @@ class DownshiftMultiple extends React.Component {
     render() {
         const { classes, searchName, placeHolder } = this.props;
         const { inputValue, selectedItem } = this.state;
-
         return (
             <Downshift
                 id="downshift-multiple"
@@ -166,9 +159,9 @@ class DownshiftMultiple extends React.Component {
                             InputProps: getInputProps({
                                 startAdornment: selectedItem.map(item => (
                                     <Chip
-                                        key={item}
+                                        key={item.id}
                                         tabIndex={-1}
-                                        label={item}
+                                        label={item.name}
                                         className={classes.chip}
                                         onDelete={this.handleDelete(item)}
                                     />
@@ -185,7 +178,7 @@ class DownshiftMultiple extends React.Component {
                                     renderSuggestion({
                                         suggestion,
                                         index,
-                                        itemProps: getItemProps({ item: suggestion.label }),
+                                        itemProps: getItemProps({ item: suggestion }),
                                         highlightedIndex,
                                         selectedItem: selectedItem2,
                                     }),
@@ -231,6 +224,8 @@ const styles = theme => ({
     },
     chip: {
         margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`,
+        backgroundColor: "darkGray",
+        color: "white"
     },
     inputRoot: {
         marginTop: 16

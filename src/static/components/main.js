@@ -12,7 +12,7 @@ class Main extends PureComponent {
         lastName: ""
     };
     componentDidMount() {
-
+        this.onTagSearch([]);
     }
     onNameSearch() {
         //ex. http://localhost:8080/api/ambassadors?firstName=Phillip&lastName=Jones
@@ -22,7 +22,9 @@ class Main extends PureComponent {
     }
     onTagSearch = query => {
         //ex. http://localhost:8080/api/ambassadors?tags=Apartment&tags=Education
-        fetch(`/api/ambassadors?tags=${query.join("tags=")}`).then(response => response.json()).then(ambassadors => this.setState({ambassadors}));
+        const queryArray = [];
+        query.map(tag => queryArray.push(tag.name));
+        fetch(`/api/ambassadors?tags=${queryArray.join("tags=")}`).then(response => response.json()).then(ambassadors => this.setState({ambassadors, firstName: "", lastName: ""}));
     };
     handleChange(e, name) {
         this.setState({[name]: e.target.value}, () => this.onNameSearch());
