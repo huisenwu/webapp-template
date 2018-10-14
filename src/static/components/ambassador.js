@@ -1,16 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
-import {ExpansionPanel, Chip} from '@material-ui/core';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import {ExpansionPanel, Chip, ExpansionPanelSummary, ExpansionPanelDetails, Button, Divider} from '@material-ui/core';
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
-
+import {PlayArrow, Pause, Stop} from "@material-ui/icons";
 const styles = theme => ({
     root: {
         width: '100%',
@@ -52,7 +47,16 @@ function DetailedExpansionPanel(props) {
         <div className={classes.root}>
             <ExpansionPanel>
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                    <div className={classes.column}>
+                    <div className={classes.column} style={{display: "flex"}}>
+                        {
+                            ambassador.status === "ACTIVE" ?
+                                <PlayArrow style={{paddingRight: 10}} /> :
+                                ambassador.status === "INACTIVE" ?
+                                    <Stop style={{paddingRight: 10}}/> :
+                                ambassador.status === "PAUSED" ?
+                                    <Pause style={{paddingRight: 10}}/> :
+                                    null
+                        }
                         <Typography className={classes.heading}>{ambassador.firstName} {ambassador.lastName}</Typography>
                     </div>
                     <div className={classes.column}>
